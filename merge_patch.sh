@@ -28,7 +28,7 @@ cd -
 for f in `cat ${patch_file} | grep "Only in ${original}" | sed 's/^.*://'`; do
     rm -r ${original}/$f
 done
-mv ${original} ./${modified}_patched
+mv ${original} ./${modified}
 
 # remove original
 original_root=${original%%/*}
