@@ -18,6 +18,17 @@ if [ ! ${patch_file:0:1} == "/" ]; then
     patch_file=$(realpath ${patch_file})
 fi
 
+# check if the original is available as zipped archive or directly
+if [ ! -d ${original} ]; then
+    tgz=${original%%/*}
+    if [ ! -f ${tgz}.* ]; then
+        echo "Could not find ${original}/ nor ${tgz}.*. Abort."
+        exit
+    fi   
+    # if there is tar archive, extract
+    tar -xvf ${tgz}.*
+fi
+
 # find correct path in original and apply patch
 path=${original%"/${modified}"*}
 cd ${path}
